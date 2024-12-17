@@ -33,6 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': ['off'], // для отклбючени ошибки из-за отсутствия типизации
     },
   },
 ]

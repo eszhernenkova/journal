@@ -5,11 +5,18 @@
     padding: 20px;
     border: none;
     cursor: pointer;
-    text-align: start;
-    display: block;
+    // text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: start;
     width: 100%;
 
     &:hover {
         background: #E5969D;
+    }
+
+    img {
+        display: block;
+        margin-bottom: 4px;
     }
 }
