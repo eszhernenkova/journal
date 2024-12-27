@@ -1,58 +1,51 @@
 import styles from  './JournalForm.module.scss';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import classNames from 'classnames'; //библиотека для упрощения выражений с тернарными операторами
+import { formReducer, INITIAL_STATE } from './JournalForm.state';
+
+
+
 
 
 function JournalForm( { onSubmit } ) {
+  const [ formState, dispatchForm ] = useReducer (formReducer, INITIAL_STATE);
+  const { isValid, isFormReadyToSubmit, values } = formState;
 
-  const [ formValidState, setFormValidState ] = useState({
-    title: true,
-    text: true,
-    date: true
-  });
+  useEffect(()=> {
+    let timerId;
+    if(!isValid.date || !isValid.text || !isValid.title) {
+      timerId = setTimeout(()=> {
+        dispatchForm({ type: 'RESET_VALIDY' });
+      }, 2000);
+      return ()=> {
+        clearTimeout(timerId);
+      }
+    }
+  }, [isValid]);
+
+  useEffect(()=> {
+    if(isFormReadyToSubmit){
+      onSubmit(values);
+      dispatchForm({ type: 'CLEAR' });
+    }
+  }, [isFormReadyToSubmit]);
   
   const addJournalItem = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target); // FormData - объект, который содержит данные всех полей формы
-    const formProps = Object.fromEntries(formData); // Object.fromEntries() - преобразует объект FormData в обычный объект JavaScript, где ключами являются имена полей, а значениями — их значения
-    let isFormValid = true;
-    if(!formProps.title?.trim().length){
-      setFormValidState(state => ({...state, title: false }));
-      isFormValid = false;
-    } else {
-      setFormValidState(state => ({...state, title: true }));
-    }
-
-    if(!formProps.text?.trim().length){
-      setFormValidState(state => ({...state, text: false }));
-      isFormValid = false;
-    } else {
-      setFormValidState(state => ({...state, text: true }));
-    }
-
-    if(!formProps.date){
-      setFormValidState(state => ({...state, date: false }));
-      isFormValid = false;
-    } else {
-      setFormValidState(state => ({...state, date: true }));
-    }
-
-    if(!isFormValid){
-      return;
-    }
-
-    onSubmit(formProps);
-    console.log(formProps);
+    dispatchForm({ type: 'SUBMIT'});
   }
 
+  const onChange = (e) => {
+    dispatchForm({ type: 'SET_VALUE', payload: { [ e.target.name ]: e.target.value } })
+  }
 
 
   return (
     <form className={styles.journalForm} onSubmit={addJournalItem}>
       <div>
-        <input type="text" name='title' className={classNames(styles['input-title'], {
-          [styles.invalid] : !formValidState.title 
+        <input type="text" name='title' value={values.title} onChange={onChange} className={classNames(styles['input-title'], {
+          [styles.invalid] : !isValid.title 
         })} />
       </div>
         <div className={styles.formRow} >
@@ -60,8 +53,8 @@ function JournalForm( { onSubmit } ) {
             <img src="/calendar.svg" alt='Иконка календаря'/>
             <span>Дата</span> 
           </label>
-          <input type="date" name='date' id='date' className={classNames(styles.input, {
-            [styles.invalid] : !formValidState.date
+          <input type="date" name='date' id='date' value={values.date} onChange={onChange} className={classNames(styles.input, {
+            [styles.invalid] : !isValid.date
           })} />
         </div>
 
@@ -70,13 +63,13 @@ function JournalForm( { onSubmit } ) {
             <img src="/folder.svg" alt='Иконка календаря'/>
             <span>Метки</span> 
           </label>
-          <input  type="text" id='tag' name='tag' className={styles.input} />
+          <input  type="text" id='tag' name='tag' value={values.tag} onChange={onChange} className={styles.input} />
         </div>
         
 
 
-        <textarea name="text" id="" cols='30' rows='10' className={classNames(styles.input, {
-          [styles.invalid] : !formValidState.text
+        <textarea name="text" id="" cols='30' rows='10' value={values.text} onChange={onChange} className={classNames(styles.input, {
+          [styles.invalid] : !isValid.text
         })} ></textarea>
         <Button text = 'Сохранить'/>
     </form>
