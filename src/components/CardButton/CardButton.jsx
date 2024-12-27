@@ -1,9 +1,9 @@
-import './CardButton.scss'
+import styles from './CardButton.module.scss'
 
 
 function CardButton({ children, className }) {
 
-  const cl = 'card-button' + (className ? ' ' + className : '');
+  const cl = `${styles.cardButton} ${className || ''}`.trim();
   return (
     <button className={cl}>{ children }</button>
   )

@@ -7,11 +7,15 @@
     transition: border-color 0.25s;
     border: none; 
     color: #ffffff;
-}
-
-.accent {
     background: #657167;
     &:hover {
         background: #E5969D;
     }
 }
+
+// .accent {
+//     background: #657167;
+//     &:hover {
+//         background: #E5969D;
+//     }
+// }

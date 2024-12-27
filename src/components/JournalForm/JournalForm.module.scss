@@ -1,0 +1,55 @@
+.journalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .input {
+        border: none;
+        background: none;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: 'Source Sans 3', sans-serif;
+        border-bottom: 1px solid #585e58;
+        color: #ffffff;
+        width: 100%;
+
+       //для смены цвета иконки календаря в инпуте "date"
+       &::-webkit-calendar-picker-indicator {
+            filter: invert(100%);
+        }
+    }
+
+    .input-title {
+       border: none; 
+       background: none;
+       font-size: 32px;
+       font-family: 'Source Sans 3', sans-serif;
+       color: #ffffff;
+       border-bottom: 1px solid #585e58;
+        width: 100%;
+    }
+
+    .formRow {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        min-width: 150px;
+        color: #ffffff;
+
+        .formLabel {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #ffffff;
+        }
+    }
+
+    
+
+    .invalid {
+        border: 1px solid red;
+        background: #440606;
+    }
+
+}
+

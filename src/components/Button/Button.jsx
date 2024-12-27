@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import './Button.scss';
+// import { useState } from 'react';
+import styles from  './Button.module.scss';
 
 function Button({ text }) {
   return (
-    <button className='button accent'>{text}</button>
+    <button className={styles.button}>{text}</button>
   )
 }
 

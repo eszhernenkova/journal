@@ -1,4 +1,4 @@
-.card-button{
+.cardButton{
     border-radius: 3px;
     background: #657167;
     color: #ffffff;
@@ -6,7 +6,8 @@
     border: none;
     cursor: pointer;
     text-align: start;
-    display: block;
+    display: inline-block;
+    justify-content: center;
     width: 100%;
 
     &:hover {

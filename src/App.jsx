@@ -10,20 +10,7 @@ import JournalList from './components/JournalList/JournalList'
 import Body from './layouts/Body/Body'
 import LeftPanel from './layouts/LeftPanel/LeftPanel'
 
-const INITIAL_DATA = [
-    // {
-    //   id: 1,
-    //   title: 'Подготовка обновления курсов',
-    //   text: 'Горные походы открывают удивительные природные ландшафты',
-    //   date: new Date()
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Поход в горы',
-    //   text: 'Думал, что очень много времени',
-    //   date: new Date(),
-    // }
-  ];
+const INITIAL_DATA = [];
 
 function App() {
   const [ items, setItems ] = useState(INITIAL_DATA);
@@ -39,9 +26,6 @@ function App() {
     } ]);
   };
 
-  
- 
-
   return (
     <div className='app'>
       <LeftPanel>
@@ -52,10 +36,7 @@ function App() {
       <Body>
         <JournalForm onSubmit={addItem}/>
       </Body>
-
-
     </div>
-    
   )
 }
 

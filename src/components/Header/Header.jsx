@@ -1,10 +1,8 @@
-import './Header.scss'
-
-
+import styles from './Header.module.scss'
 
 function Header() {
   return (
-    <img className='logo' src="/Logo.svg" alt="Логотип журнала" />
+    <img className={styles.logo} src="/Logo.svg" alt="Логотип журнала" />
   )
 }
 

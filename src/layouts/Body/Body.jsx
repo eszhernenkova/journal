@@ -1,8 +1,8 @@
-import './Body.scss'
+import styles from './Body.module.scss'
 
 function Body({ children }) {
   return (
-    <div className='body'>{ children }</div>
+    <div className={styles.body}>{ children }</div>
   )
 }
 

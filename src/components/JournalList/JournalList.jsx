@@ -1,6 +1,6 @@
 import CardButton from '../CardButton/CardButton';
 import JournalItem from '../JournalItem/JournalItem';
-import './JournalList.scss'
+import styles from './JournalList.module.scss';
 
 
 function JournalList({ items }) {
