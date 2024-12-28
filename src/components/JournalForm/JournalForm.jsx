@@ -52,7 +52,7 @@ function JournalForm( { onSubmit } ) {
   
   const addJournalItem = (e) => {
     e.preventDefault();
-    dispatchForm({ type: 'SUBMIT'}); 
+    dispatchForm({ type: 'SUBMIT'});
   }
 
   const onChange = (e) => {

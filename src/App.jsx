@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 
 import Header from './components/Header/Header'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton'
@@ -9,38 +8,30 @@ import LeftPanel from './layouts/LeftPanel/LeftPanel'
 
 import './App.scss'
 
+import { useLocalStorage } from './components/hooks/use-localstorage.hook'
+
+function mapItems(items) {
+  if(!items) {
+    return [];
+  }
+
+  return items.map(i => ({
+    ...i,
+    date: new Date(i.date),
+  }));
+}
+
 
 function App() {
-  const [ items, setItems ] = useState([]);
-
-  useEffect(()=>{
-    const data = JSON.parse(localStorage.getItem('data'));
-
-    if(data) {
-      setItems(data.map(item => ({
-        ...item,
-        date: new Date(item.date),
-      })));
-    }
-  }, [])
-  
-  useEffect(()=> {
-    if(items.length){
-      console.log('запись')
-      localStorage.setItem('data', JSON.stringify(items));
-      // localStorage.removeItem('data');
-    }
-  }, [items])
-
-  
+  const [ items, setItems ] = useLocalStorage('data',[]);
 
   const addItem = item => {
-    setItems(oldItems => [ ...oldItems, {
+    setItems([ ...mapItems(items), {
       text: item.text,
       title: item.title,
       date: new Date(item.date),
-      id: Math.max(...oldItems.map(i => i.id)) + 1
-    } ]);
+      id: Math.max(...(items || []).map(i => i.id), 0) + 1
+    }]);
   };
 
   return (
@@ -48,7 +39,7 @@ function App() {
       <LeftPanel>
         <Header />
         <JournalAddButton/>
-        <JournalList items={items} />
+        <JournalList items={mapItems(items)} />
       </LeftPanel>
       <Body>
         <JournalForm onSubmit={addItem}/>
