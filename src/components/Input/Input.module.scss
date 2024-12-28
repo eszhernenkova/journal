@@ -1,0 +1,26 @@
+.input {
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    border-bottom: 1px solid #585e58;
+    color: #ffffff;
+    width: 100%;
+
+    //для смены цвета иконки календаря в инпуте "date"
+    &::-webkit-calendar-picker-indicator {
+        filter: invert(100%);
+    }
+}
+
+.input-title {
+    font-size: 32px;
+    // color: #ffffff;
+}
+
+
+.invalid {
+    border: 1px solid red;
+    background: #440606;
+}

@@ -1,29 +1,14 @@
-
 import { useEffect, useState } from 'react'
-import './App.scss'
-// import CardButton from './components/CardButton/CardButton'
+
 import Header from './components/Header/Header'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton'
 import JournalForm from './components/JournalForm/JournalForm'
-// import JournalItem from './components/JournalItem/JournalItem'
 import JournalList from './components/JournalList/JournalList'
 import Body from './layouts/Body/Body'
 import LeftPanel from './layouts/LeftPanel/LeftPanel'
 
-// const INITIAL_DATA = [
-//   {
-//     text: 'Подготовка к обновлению курсов',
-//     title: 'Горные походы открывают удивительные природные ландшафты',
-//     date: new Date(),
-//     id: 1
-//   },
-//   {
-//     text: 'Поход в горы',
-//     title: 'Думал, что очень много времени',
-//     date: new Date(),
-//     id: 2
-//   }
-// ];
+import './App.scss'
+
 
 function App() {
   const [ items, setItems ] = useState([]);
@@ -38,6 +23,7 @@ function App() {
       })));
     }
   }, [])
+  
   useEffect(()=> {
     if(items.length){
       console.log('запись')
