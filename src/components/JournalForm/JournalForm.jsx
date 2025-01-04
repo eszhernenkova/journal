@@ -7,6 +7,7 @@ import { formReducer, INITIAL_STATE } from './JournalForm.state';
 
 import Button from '../Button/Button';
 import Input from '../Input/Input';
+import { UserContext } from '../../context/user.context';
 
 function JournalForm( { onSubmit } ) {
   const [ formState, dispatchForm ] = useReducer (formReducer, INITIAL_STATE);
@@ -61,33 +62,37 @@ function JournalForm( { onSubmit } ) {
 
 
   return (
-    <form className={styles.journalForm} onSubmit={addJournalItem}>
-      <div>
-        <Input type="text" name='title' isValid={isValid.title} ref={titleref} value={values.title} onChange={onChange} appearance='title' />
-      </div>
-        <div className={styles.formRow} >
-          <label htmlFor="date" className={styles.formLabel}>
-            <img src="/calendar.svg" alt='Иконка календаря'/>
-            <span>Дата</span> 
-          </label>
-          <Input type="date" name='date' id='date' isValid={isValid.date} ref={dateref} value={values.date} onChange={onChange} />
-        </div>
+    <UserContext.Consumer>
+      {(context) => (
+        <form className={styles.journalForm} onSubmit={addJournalItem}>
+          {context.userId}
+          <div>
+            <Input type="text" name='title' isValid={isValid.title} ref={titleref} value={values.title} onChange={onChange} appearance='title' />
+          </div>
+          <div className={styles.formRow} >
+            <label htmlFor="date" className={styles.formLabel}>
+              <img src="/calendar.svg" alt='Иконка календаря'/>
+              <span>Дата</span> 
+            </label>
+            <Input type="date" name='date' id='date' isValid={isValid.date} ref={dateref} value={values.date} onChange={onChange} />
+          </div>
 
-        <div className={styles.formRow} >
-          <label htmlFor="tag" className={styles.formLabel}>
-            <img src="/folder.svg" alt='Иконка календаря'/>
-            <span>Метки</span> 
-          </label>
-          <Input  type="text" id='tag' name='tag' value={values.tag} onChange={onChange} />
-        </div>
-        
+          <div className={styles.formRow} >
+            <label htmlFor="tag" className={styles.formLabel}>
+              <img src="/folder.svg" alt='Иконка календаря'/>
+              <span>Метки</span> 
+            </label>
+            <Input  type="text" id='tag' name='tag' value={values.tag} onChange={onChange} />
+          </div>
 
-
-        <textarea name="text" id="" cols='30' rows='10' ref={textref} value={values.text} onChange={onChange} className={classNames(styles.input, {
-          [styles.invalid] : !isValid.text
-        })} ></textarea>
-        <Button text = 'Сохранить'/>
-    </form>
+          <textarea name="text" id="" cols='30' rows='10' ref={textref} value={values.text} onChange={onChange} className={classNames(styles.input, {
+            [styles.invalid] : !isValid.text
+          })} ></textarea>
+          <Button text = 'Сохранить'/>
+        </form>
+      )}
+      
+    </ UserContext.Consumer>
   )
 }
 
