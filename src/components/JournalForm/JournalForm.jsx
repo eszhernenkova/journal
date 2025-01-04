@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef } from 'react';
 import classNames from 'classnames'; //библиотека для упрощения выражений с тернарными операторами
 
 import styles from  './JournalForm.module.scss';
@@ -15,6 +15,7 @@ function JournalForm( { onSubmit } ) {
   const titleref = useRef();
   const textref = useRef();
   const dateref = useRef();
+  const { userId } = useContext(UserContext);
 
   const focusError = (isValid) => {
     switch(true){
@@ -62,37 +63,32 @@ function JournalForm( { onSubmit } ) {
 
 
   return (
-    <UserContext.Consumer>
-      {(context) => (
-        <form className={styles.journalForm} onSubmit={addJournalItem}>
-          {context.userId}
-          <div>
-            <Input type="text" name='title' isValid={isValid.title} ref={titleref} value={values.title} onChange={onChange} appearance='title' />
-          </div>
-          <div className={styles.formRow} >
-            <label htmlFor="date" className={styles.formLabel}>
-              <img src="/calendar.svg" alt='Иконка календаря'/>
-              <span>Дата</span> 
-            </label>
-            <Input type="date" name='date' id='date' isValid={isValid.date} ref={dateref} value={values.date} onChange={onChange} />
-          </div>
+    <form className={styles.journalForm} onSubmit={addJournalItem}>
+      {userId}
+      <div>
+        <Input type="text" name='title' isValid={isValid.title} ref={titleref} value={values.title} onChange={onChange} appearance='title' />
+      </div>
+      <div className={styles.formRow} >
+        <label htmlFor="date" className={styles.formLabel}>
+          <img src="/calendar.svg" alt='Иконка календаря'/>
+          <span>Дата</span> 
+        </label>
+        <Input type="date" name='date' id='date' isValid={isValid.date} ref={dateref} value={values.date} onChange={onChange} />
+      </div>
 
-          <div className={styles.formRow} >
-            <label htmlFor="tag" className={styles.formLabel}>
-              <img src="/folder.svg" alt='Иконка календаря'/>
-              <span>Метки</span> 
-            </label>
-            <Input  type="text" id='tag' name='tag' value={values.tag} onChange={onChange} />
-          </div>
+      <div className={styles.formRow} >
+        <label htmlFor="tag" className={styles.formLabel}>
+          <img src="/folder.svg" alt='Иконка календаря'/>
+          <span>Метки</span> 
+        </label>
+        <Input  type="text" id='tag' name='tag' value={values.tag} onChange={onChange} />
+      </div>
 
-          <textarea name="text" id="" cols='30' rows='10' ref={textref} value={values.text} onChange={onChange} className={classNames(styles.input, {
-            [styles.invalid] : !isValid.text
-          })} ></textarea>
-          <Button text = 'Сохранить'/>
-        </form>
-      )}
-      
-    </ UserContext.Consumer>
+      <textarea name="text" id="" cols='30' rows='10' ref={textref} value={values.text} onChange={onChange} className={classNames(styles.input, {
+        [styles.invalid] : !isValid.text
+      })} ></textarea>
+      <Button text = 'Сохранить'/>
+    </form>
   )
 }
 

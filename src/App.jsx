@@ -5,11 +5,11 @@ import JournalForm from './components/JournalForm/JournalForm'
 import JournalList from './components/JournalList/JournalList'
 import Body from './layouts/Body/Body'
 import LeftPanel from './layouts/LeftPanel/LeftPanel'
+import { useLocalStorage } from './components/hooks/use-localstorage.hook'
+import { UserContextProvider } from './context/user.context'
 
 import './App.scss'
 
-import { useLocalStorage } from './components/hooks/use-localstorage.hook'
-import { UserContext } from './context/user.context'
 
 function mapItems(items) {
   if(!items) {
@@ -36,7 +36,7 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={{ userId: 1 }} >
+    <UserContextProvider >
       <div className='app'>
         <LeftPanel>
           <Header />
@@ -47,7 +47,7 @@ function App() {
           <JournalForm onSubmit={addItem}/>
         </Body>
       </div>
-    </UserContext.Provider>
+    </UserContextProvider>
   )
 }
 
