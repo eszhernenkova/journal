@@ -1,9 +1,9 @@
 // import { useState } from 'react';
 import styles from  './Button.module.scss';
 
-function Button({ text }) {
+function Button({ children, onClick }) {
   return (
-    <button className={styles.button}>{text}</button>
+    <button className={styles.button} onClick={onClick} >{children}</button>
   )
 }
 

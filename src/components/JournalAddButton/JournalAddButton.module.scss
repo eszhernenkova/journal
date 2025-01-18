@@ -1,9 +1,17 @@
 .journalAdd {
+    display: flex;
     padding: 10px;
     text-align: center;
-    display: flex;
     gap: 8px;
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    line-height: 1;
+
+    img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+    }
+
 }

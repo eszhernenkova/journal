@@ -1,11 +1,14 @@
+
 import SelectUser from '../SelectUser/SelectUser'
-import styles from './Header.module.scss'
+import Logo from '../Logo/Logo';
+
+const logos = ['/Logo.svg', 'vite.svg'];
 
 function Header() {
 
   return (
     <>
-      <img className={styles.logo} src="/Logo.svg" alt="Логотип журнала" />
+      <Logo image={logos[0]} />
       <SelectUser />
     </>
   )

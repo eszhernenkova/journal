@@ -1,11 +1,11 @@
 import styles from './CardButton.module.scss'
 
 
-function CardButton({ children, className }) {
+function CardButton({ children, className, ...props }) {
 
   const cl = `${styles.cardButton} ${className || ''}`.trim();
   return (
-    <button className={cl}>{ children }</button>
+    <button {...props} className={cl}>{ children }</button>
   )
 }
 

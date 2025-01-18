@@ -33,6 +33,20 @@
             gap: 20px;
             color: #ffffff;
         }
+
+        .deleteButton{
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            height: 30px;
+            width: 30px;
+
+            &:hover {
+                background: #E5969D;
+                border-radius: 50px;
+            }
+        }
     }
 
     
